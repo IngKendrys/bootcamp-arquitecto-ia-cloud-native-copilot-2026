@@ -1,0 +1,1 @@
+K8s manifests are provided via Helm chart in ../helm/app

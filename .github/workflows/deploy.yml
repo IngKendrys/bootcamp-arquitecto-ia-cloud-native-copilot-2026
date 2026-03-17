@@ -1,0 +1,57 @@
+name: deploy
+on:
+  workflow_dispatch:
+
+jobs:
+  helm-deploy-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with: { creds: ${{ secrets.AZURE_CREDENTIALS }} }
+      - uses: azure/use-kubelogin@v1
+      - uses: azure/aks-set-context@v4
+        with:
+          resource-group: ${{ secrets.AZ_RG }}
+          cluster-name: ${{ secrets.AZ_AKS }}
+          admin: false
+      - name: Helm upgrade (dev)
+        run: |
+          helm upgrade --install enrollmenthub infra/helm/app -n app --create-namespace             --set backend.image=ghcr.io/${{ github.repository_owner }}/enrollmenthub-backend:latest             --set frontend.image=ghcr.io/${{ github.repository_owner }}/enrollmenthub-frontend:latest
+
+  helm-deploy-stage:
+    runs-on: ubuntu-latest
+    needs: [ helm-deploy-dev ]
+    environment: stage
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with: { creds: ${{ secrets.AZURE_CREDENTIALS }} }
+      - uses: azure/use-kubelogin@v1
+      - uses: azure/aks-set-context@v4
+        with:
+          resource-group: ${{ secrets.AZ_RG }}
+          cluster-name: ${{ secrets.AZ_AKS }}
+          admin: false
+      - name: Helm upgrade (stage)
+        run: |
+          helm upgrade --install enrollmenthub infra/helm/app -n app --create-namespace             --set backend.image=ghcr.io/${{ github.repository_owner }}/enrollmenthub-backend:latest             --set frontend.image=ghcr.io/${{ github.repository_owner }}/enrollmenthub-frontend:latest
+
+  helm-deploy-prod:
+    runs-on: ubuntu-latest
+    needs: [ helm-deploy-stage ]
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with: { creds: ${{ secrets.AZURE_CREDENTIALS }} }
+      - uses: azure/use-kubelogin@v1
+      - uses: azure/aks-set-context@v4
+        with:
+          resource-group: ${{ secrets.AZ_RG }}
+          cluster-name: ${{ secrets.AZ_AKS }}
+          admin: false
+      - name: Helm upgrade (prod)
+        run: |
+          helm upgrade --install enrollmenthub infra/helm/app -n app --create-namespace             --set backend.image=ghcr.io/${{ github.repository_owner }}/enrollmenthub-backend:latest             --set frontend.image=ghcr.io/${{ github.repository_owner }}/enrollmenthub-frontend:latest

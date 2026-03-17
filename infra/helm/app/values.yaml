@@ -1,0 +1,6 @@
+backend:
+  image: ghcr.io/OWNER/enrollmenthub-backend:latest
+frontend:
+  image: ghcr.io/OWNER/enrollmenthub-frontend:latest
+service:
+  port: 80

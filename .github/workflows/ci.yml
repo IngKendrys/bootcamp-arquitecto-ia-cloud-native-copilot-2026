@@ -1,0 +1,51 @@
+name: ci
+on:
+  push:
+    branches: [ main ]
+  pull_request: {}
+
+jobs:
+  build-backend:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: '10.0.x' }
+      - run: |
+          cd templates/dotnet10-api
+          dotnet restore ./src
+          dotnet build ./src -c Release --no-restore
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20.x' }
+      - run: |
+          cd templates/next16-app
+          npm ci || npm i --no-audit
+          npm run build || true
+  docker-push:
+    runs-on: ubuntu-latest
+    needs: [ build-backend, build-frontend ]
+    permissions: { contents: read, packages: write }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with: { registry: ghcr.io, username: ${{ github.actor }}, password: ${{ secrets.GITHUB_TOKEN }} }
+      - name: Build & Push backend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./templates/dotnet10-api
+          file: ./templates/dotnet10-api/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/enrollmenthub-backend:latest
+      - name: Build & Push frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: ./templates/next16-app
+          file: ./templates/next16-app/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/enrollmenthub-frontend:latest

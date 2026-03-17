@@ -1,0 +1,17 @@
+name: reusable-deploy-helm
+on: workflow_call
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/login@v2
+        with: { creds: ${{ secrets.AZURE_CREDENTIALS }} }
+      - uses: azure/use-kubelogin@v1
+      - uses: azure/aks-set-context@v4
+        with:
+          resource-group: ${{ secrets.AZ_RG }}
+          cluster-name: ${{ secrets.AZ_AKS }}
+      - name: Helm upgrade
+        run: |
+          helm upgrade --install enrollmenthub infra/helm/app -n app --create-namespace             --set backend.image=${{ inputs.backend_image }}             --set frontend.image=${{ inputs.frontend_image }}

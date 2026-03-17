@@ -1,0 +1,2 @@
+image: ghcr.io/OWNER/enrollmenthub-fastapi:latest
+port: 8000

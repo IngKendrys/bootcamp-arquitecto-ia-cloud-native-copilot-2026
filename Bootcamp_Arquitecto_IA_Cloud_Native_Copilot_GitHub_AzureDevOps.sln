@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{808186BE-9BD0-DD1D-D574-36EEAD1E7F8F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnet10-api", "dotnet10-api", "{045EF8D4-C0B0-F0D6-B8C0-D671A031B8C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{39F8C4A8-80B7-310E-1500-8CCCE97B1CD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "templates\dotnet10-api\src\Api.csproj", "{E64A9640-A1B3-8255-73F0-1377C42383D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E64A9640-A1B3-8255-73F0-1377C42383D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E64A9640-A1B3-8255-73F0-1377C42383D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E64A9640-A1B3-8255-73F0-1377C42383D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E64A9640-A1B3-8255-73F0-1377C42383D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{045EF8D4-C0B0-F0D6-B8C0-D671A031B8C7} = {808186BE-9BD0-DD1D-D574-36EEAD1E7F8F}
+		{39F8C4A8-80B7-310E-1500-8CCCE97B1CD8} = {045EF8D4-C0B0-F0D6-B8C0-D671A031B8C7}
+		{E64A9640-A1B3-8255-73F0-1377C42383D7} = {39F8C4A8-80B7-310E-1500-8CCCE97B1CD8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9E7C3B9-6772-48B2-AB79-4A270FE60DFD}
+	EndGlobalSection
+EndGlobal

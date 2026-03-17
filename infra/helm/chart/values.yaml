@@ -1,0 +1,7 @@
+
+backend:
+  image: ghcr.io/OWNER/dotnet10-api:latest
+frontend:
+  image: ghcr.io/OWNER/next16-app:latest
+service:
+  port: 80

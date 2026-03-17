@@ -1,0 +1,2 @@
+image: ghcr.io/OWNER/enrollmenthub-angular:latest
+port: 4200
