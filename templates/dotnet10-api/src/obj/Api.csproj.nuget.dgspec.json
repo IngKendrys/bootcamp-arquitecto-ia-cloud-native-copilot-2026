@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Desarrollo\\GithubCopilot\\Bootcamp_Arquitecto_IA_Cloud_Native_Copilot_GitHub_AzureDevOps_2026\\templates\\dotnet10-api\\src\\Api.csproj": {}
+    "/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/Api.csproj": {}
   },
   "projects": {
-    "C:\\Desarrollo\\GithubCopilot\\Bootcamp_Arquitecto_IA_Cloud_Native_Copilot_GitHub_AzureDevOps_2026\\templates\\dotnet10-api\\src\\Api.csproj": {
+    "/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Desarrollo\\GithubCopilot\\Bootcamp_Arquitecto_IA_Cloud_Native_Copilot_GitHub_AzureDevOps_2026\\templates\\dotnet10-api\\src\\Api.csproj",
+        "projectUniqueName": "/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/Api.csproj",
         "projectName": "Api",
-        "projectPath": "C:\\Desarrollo\\GithubCopilot\\Bootcamp_Arquitecto_IA_Cloud_Native_Copilot_GitHub_AzureDevOps_2026\\templates\\dotnet10-api\\src\\Api.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "C:\\Desarrollo\\GithubCopilot\\Bootcamp_Arquitecto_IA_Cloud_Native_Copilot_GitHub_AzureDevOps_2026\\templates\\dotnet10-api\\src\\obj\\",
+        "projectPath": "/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/Api.csproj",
+        "packagesPath": "/home/codespace/.nuget/packages/",
+        "outputPath": "/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/codespace/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,7 +38,7 @@
           "auditLevel": "low",
           "auditMode": "all"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "10.0.200"
       },
       "frameworks": {
         "net10.0": {
@@ -69,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.104/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
