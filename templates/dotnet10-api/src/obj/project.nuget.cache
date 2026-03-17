@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "BstvflVXvvk=",
   "success": true,
   "projectFilePath": "/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/Api.csproj",
@@ -32,5 +33,11 @@
     "/home/codespace/.nuget/packages/system.security.cryptography.pkcs/9.0.4/system.security.cryptography.pkcs.9.0.4.nupkg.sha512",
     "/home/codespace/.nuget/packages/system.security.cryptography.protecteddata/9.0.4/system.security.cryptography.protecteddata.9.0.4.nupkg.sha512"
   ],
+=======
+  "dgSpecHash": "SSmP+3EnFYA=",
+  "success": true,
+  "projectFilePath": "/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/Api.csproj",
+  "expectedPackageFiles": [],
+>>>>>>> main
   "logs": []
 }

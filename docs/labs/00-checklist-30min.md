@@ -29,9 +29,9 @@ Checklist:
 - [Si] Rama principal visible en GitHub
 
 Si vas por Azure DevOps:
-- [ ] Repo creado en Azure Repos
-- [ ] Código importado al proyecto Azure DevOps
-- [ ] Branch policy activa en `main`
+- [-] Repo creado en Azure Repos
+- [-] Código importado al proyecto Azure DevOps
+- [-] Branch policy activa en `main`
 
 ## Minuto 10-18: abrir entorno
 
@@ -41,8 +41,8 @@ Si vas por Azure DevOps:
 3. Espera inicialización completa.
 
 Checklist:
-- [ ] Proyecto abre en VS Code web
-- [ ] Terminal funcional
+- [-] Proyecto abre en VS Code web
+- [-] Terminal funcional
 
 ### Ruta B: VS Code local + Dev Container
 1. Instala Docker Desktop.
@@ -50,8 +50,8 @@ Checklist:
 3. Ejecuta Reopen in Container.
 
 Checklist:
-- [ ] Contenedor inicia
-- [ ] Terminal corre dentro del contenedor
+- [Si] Contenedor inicia
+- [Si] Terminal corre dentro del contenedor
 
 ## Minuto 18-24: validación técnica mínima
 Ejecuta en terminal integrada:
@@ -74,12 +74,12 @@ az account show
 ```
 
 Checklist:
-- [ ] Todos los comandos responden sin error
+- [Si] Todos los comandos responden sin error
 
 ## Minuto 24-27: flujo de trabajo del curso
-- [ ] Crea rama `develop`
-- [ ] Define convención de ramas `lab-XX`
-- [ ] Crea archivo `EVIDENCIAS.md`
+- [Si] Crea rama `develop`
+- [Si] Define convención de ramas `lab-XX`
+- [Si] Crea archivo `EVIDENCIAS.md`
 
 Plantilla mínima:
 
@@ -100,9 +100,9 @@ Plantilla mínima:
 3. Ejecuta tu primer commit de trabajo.
 
 Checklist final:
-- [ ] Entorno listo
-- [ ] Ruta del curso clara
-- [ ] Primer laboratorio iniciado
+- [Si] Entorno listo
+- [Si] Ruta del curso clara
+- [Si] Primer laboratorio iniciado
 
 ## Problemas comunes y solución rápida
 1. Docker no levanta en Windows:
