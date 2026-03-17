@@ -169,12 +169,12 @@ Crea un archivo `EVIDENCIAS.md` por laboratorio con esta estructura.
 4. Verifica que puedes avanzar al Lab 02.
 
 ## Checklist final del setup
-- [ ] GitHub y Copilot listos
-- [ ] Repo creado y contenido importado
-- [ ] Entorno (Codespaces o Dev Container) operativo
-- [ ] Herramientas validadas
-- [ ] Flujo de ramas definido
-- [ ] Evidencias listas
+- [Si] GitHub y Copilot listos
+- [Si] Repo creado y contenido importado
+- [Si] Entorno (Codespaces o Dev Container) operativo
+- [Si] Herramientas validadas
+- [Si] Flujo de ramas definido
+- [Si] Evidencias listas
 
 ## Punto oficial de inicio del curso
 Empieza en `01-copilot.md` y sigue el orden de `docs/labs/README.md`.

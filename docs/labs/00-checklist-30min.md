@@ -77,9 +77,9 @@ Checklist:
 - [Si] Todos los comandos responden sin error
 
 ## Minuto 24-27: flujo de trabajo del curso
-- [ ] Crea rama `develop`
-- [ ] Define convención de ramas `lab-XX`
-- [ ] Crea archivo `EVIDENCIAS.md`
+- [Si] Crea rama `develop`
+- [Si] Define convención de ramas `lab-XX`
+- [Si] Crea archivo `EVIDENCIAS.md`
 
 Plantilla mínima:
 
@@ -100,9 +100,9 @@ Plantilla mínima:
 3. Ejecuta tu primer commit de trabajo.
 
 Checklist final:
-- [ ] Entorno listo
-- [ ] Ruta del curso clara
-- [ ] Primer laboratorio iniciado
+- [Si] Entorno listo
+- [Si] Ruta del curso clara
+- [Si] Primer laboratorio iniciado
 
 ## Problemas comunes y solución rápida
 1. Docker no levanta en Windows:
