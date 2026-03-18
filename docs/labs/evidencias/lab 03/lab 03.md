@@ -155,6 +155,58 @@ CREATE UNIQUE INDEX "IX_Users_Username" ON "Users" ("Username");
 
 ---
 
+
+## Pruebas Unitarias con xUnit
+
+### ✅ Configuración de tests
+
+**Proyecto:** `/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/tests/Template.Tests/`
+
+**Dependencias instaladas:**
+- `xunit` v2.7.1
+- `xunit.runner.visualstudio` v2.8.0  
+- `Microsoft.NET.Test.Sdk` v17.14.0
+- `Microsoft.EntityFrameworkCore.InMemory` v10.0.5
+- `BCrypt.Net-Next` v4.0.2
+
+**Archivo de pruebas:** `UsersTests.cs`
+
+### ✅ Clases de test implementadas
+
+**1. AuthControllerTests** - 5 test cases
+- `Register_WithValidInput_ReturnsOkWithUserId`: Verifica registro con credenciales válidas
+- `Register_WithDuplicateUsername_ReturnsBadRequest`: Verifica rechazo de usuario duplicado
+- `Login_WithValidCredentials_ReturnsOkWithToken`: Verifica generación de token JWT valido
+- `Login_WithInvalidPassword_ReturnsUnauthorized`: Verifica rechazo de contraseña incorrecta
+- `Login_WithNonexistentUser_ReturnsUnauthorized`: Verifica rechazo de usuario inexistente
+
+**2. UsersControllerTests** - 3 test cases
+- `GetAll_ReturnsListOfUsers`: Verifica GET /users retorna lista de usuarios
+- `Get_WithValidId_ReturnsUser`: Verifica GET /users/{id} retorna usuario específico
+- `Get_WithInvalidId_ReturnsNotFound`: Verifica GET /users/{id} retorna 404 para ID inexistente
+- `Delete_WithValidId_ReturnsNoContent`: Verifica DELETE elimina usuario exitosamente
+
+### ✅ Ejecución de tests
+
+**Comando:**
+```bash
+cd /workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api
+dotnet test tests/Template.Tests/Template.Tests.csproj --verbosity minimal
+```
+
+**Resultado:**
+```
+Restore succeeded with 1 warning(s) in 2.6s
+Api net10.0 succeeded (2.1s) → src/bin/Debug/net10.0/Api.dll
+Template.Tests net10.0 succeeded with 3 warning(s) (3.9s) → tests/bin/Debug/net10.0/Template.Tests.dll
+
+[xUnit.net 00:00:00.49]   Starting:    Template.Tests
+[xUnit.net 00:00:02.98]   Finished:    Template.Tests
+
+✅ Test summary: total: 8, failed: 0, succeeded: 8, skipped: 0, duration: 4.6s
+Build succeeded with 4 warning(s) in 16.6s
+```
+
 ## Problemas y solución
 
 ### ❌ Problema 1: Namespace incorrecto para `JwtService`
@@ -260,6 +312,18 @@ Content-Length: 0
 
 ---
 
+### ❌ Problema 7: Referencia a interfaz `IJwtService` inexistente
+**Error:**
+```
+error CS0246: The type or namespace name 'IJwtService' could not be found
+Location: UsersTests.cs(18,13)
+```
+**Causa:** El código de test intentaba referenciar `IJwtService` como interfaz, pero solo existe la clase concreta `JwtService`
+
+**Solución:**
+- Cambiar firma del método de `private IJwtService GetJwtService()` a `private JwtService GetJwtService()`
+- Usar la clase concreta en lugar de interfaz
+
 ## Capturas o logs
 
 ### 📸 Estructura de archivos clave (ubicación)
@@ -344,119 +408,6 @@ HTTP/1.1 200 OK
 [{"id":1,"username":"testuser","role":"User"}]
 ```
 
----
 
-## Pruebas Unitarias con xUnit
-
-### ✅ Configuración de tests
-
-**Proyecto:** `/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/tests/Template.Tests/`
-
-**Dependencias instaladas:**
-- `xunit` v2.7.1
-- `xunit.runner.visualstudio` v2.8.0  
-- `Microsoft.NET.Test.Sdk` v17.14.0
-- `Microsoft.EntityFrameworkCore.InMemory` v10.0.5
-- `BCrypt.Net-Next` v4.0.2
-
-**Archivo de pruebas:** `UsersTests.cs`
-
-### ✅ Clases de test implementadas
-
-**1. AuthControllerTests** - 5 test cases
-- `Register_WithValidInput_ReturnsOkWithUserId`: Verifica registro con credenciales válidas
-- `Register_WithDuplicateUsername_ReturnsBadRequest`: Verifica rechazo de usuario duplicado
-- `Login_WithValidCredentials_ReturnsOkWithToken`: Verifica generación de token JWT valido
-- `Login_WithInvalidPassword_ReturnsUnauthorized`: Verifica rechazo de contraseña incorrecta
-- `Login_WithNonexistentUser_ReturnsUnauthorized`: Verifica rechazo de usuario inexistente
-
-**2. UsersControllerTests** - 3 test cases
-- `GetAll_ReturnsListOfUsers`: Verifica GET /users retorna lista de usuarios
-- `Get_WithValidId_ReturnsUser`: Verifica GET /users/{id} retorna usuario específico
-- `Get_WithInvalidId_ReturnsNotFound`: Verifica GET /users/{id} retorna 404 para ID inexistente
-- `Delete_WithValidId_ReturnsNoContent`: Verifica DELETE elimina usuario exitosamente
-
-### ✅ Ejecución de tests
-
-**Comando:**
-```bash
-cd /workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api
-dotnet test tests/Template.Tests/Template.Tests.csproj --verbosity minimal
-```
-
-**Resultado:**
-```
-Restore succeeded with 1 warning(s) in 2.6s
-Api net10.0 succeeded (2.1s) → src/bin/Debug/net10.0/Api.dll
-Template.Tests net10.0 succeeded with 3 warning(s) (3.9s) → tests/bin/Debug/net10.0/Template.Tests.dll
-
-[xUnit.net 00:00:00.49]   Starting:    Template.Tests
-[xUnit.net 00:00:02.98]   Finished:    Template.Tests
-
-✅ Test summary: total: 8, failed: 0, succeeded: 8, skipped: 0, duration: 4.6s
-Build succeeded with 4 warning(s) in 16.6s
-```
-
-### 📊 Detalles de pruebas unitarias
-
-**Estrategia de testing:**
-- ✅ **Isolation**: usamos `DbContextOptionsBuilder` con `UseInMemoryDatabase(Guid.NewGuid().ToString())` para cada test
-- ✅ **Mock Configuration**: `ConfigurationBuilder().AddInMemoryCollection()` para JWT:Key y JWT:Issuer
-- ✅ **BCrypt**: Uso de `BCrypt.Net.BCrypt.HashPassword()` para crear contraseñas hasheadas realistas
-- ✅ **Assertions**: xUnit assertions para validar tipos de respuesta (OkObjectResult, BadRequestObjectResult, etc.)
-
-**Estructura de test (ejemplo):**
-```csharp
-[Fact]
-public async Task Register_WithValidInput_ReturnsOkWithUserId() {
-    // Arrange
-    var db = CreateDbContext();  // InMemory isolated database
-    var jwtService = GetJwtService();  // Mock JWT with test credentials
-    var controller = new AuthController(db, jwtService);
-    
-    // Act
-    var result = await controller.Register(new RegisterDto("newuser", "Password123"));
-    
-    // Assert
-    Assert.IsType<OkObjectResult>(result);
-    var okResult = result as OkObjectResult;
-    Assert.Equal(200, okResult.StatusCode);
-}
-```
-
-### ⚠️ Problemas encontrados en tests
-
-### ❌ Problema 1: Referencia a interfaz `IJwtService` inexistente
-**Error:**
-```
-error CS0246: The type or namespace name 'IJwtService' could not be found
-Location: UsersTests.cs(18,13)
-```
-**Causa:** El código de test intentaba referenciar `IJwtService` como interfaz, pero solo existe la clase concreta `JwtService`
-
-**Solución:**
-- Cambiar firma del método de `private IJwtService GetJwtService()` a `private JwtService GetJwtService()`
-- Usar la clase concreta en lugar de interfaz
-
----
-
-## Conclusiones
-
-✅ **Lab 03 Completado Exitosamente**
-
-**Requisitos alcanzados:**
-1. ✅ Entidad User con propiedades id, username, passwordHash, role
-2. ✅ CRUD endpoints (POST register/login, GET, PUT, DELETE)
-3. ✅ DbContext con EF Core y Migrations
-4. ✅ JWT Bearer authentication en endpoints protegidos
-5. ✅ Persistencia con SQLite (data.db)
-6. ✅ Pruebas unitarias mínimas con xUnit (8 tests, 100% pass rate)
-7. ✅ Documentación completa de problemas y soluciones
-
-**Entregables:**
-- Código API funcional en `/templates/dotnet10-api/src/`
-- Proyecto de tests en `/templates/dotnet10-api/tests/Template.Tests/`
-- Base de datos SQLite con migraciones aplicadas
-- Pruebas unitarias pasando exitosamente (8/8)
 
 
