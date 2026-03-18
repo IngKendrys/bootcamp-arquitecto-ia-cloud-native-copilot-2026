@@ -1,5 +1,4 @@
-﻿
-# Python 3.14.3 + FastAPI 0.115.11
+﻿# Python 3.14.3 + FastAPI 0.115.11
 
 ## Novedades de FastAPI recientes (alto nivel)
 - Rendimiento, tipado con Pydantic v2, *dependency injection* refinada.  
