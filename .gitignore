@@ -1,5 +1,17 @@
 .venv/
 **/.venv/
+node_modules/
+**/node_modules/
+.next/
+**/.next/
+dist/
+build/
+bin/
+obj/
+**/bin/
+**/obj/
+coverage/
+*.log
 __pycache__/
 **/__pycache__/
 *.pyc
@@ -7,3 +19,5 @@ __pycache__/
 *.pyd
 .pytest_cache/
 *.db
+.env.local
+**/.env.local

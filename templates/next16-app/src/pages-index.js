@@ -1,1 +1,0 @@
-export default function Home(){return (<main><h1>EnrollmentHub — Next 16 / React 19</h1></main>)}

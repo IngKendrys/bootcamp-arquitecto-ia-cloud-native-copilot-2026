@@ -1,1 +1,5 @@
-module.exports={experimental:{serverActions:true}}
+module.exports = {
+	experimental: {
+		serverActions: {},
+	},
+}
