@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -9,10 +9,8 @@ export class UsersApiService {
   private readonly http = inject(HttpClient);
   private readonly apiBaseUrl = environment.apiBaseUrl;
 
-  listUsers(token: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiBaseUrl}/api/users`, {
-      headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
-    });
+  listUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiBaseUrl}/api/users`);
   }
 
   registerUser(payload: RegisterUserRequest): Observable<User> {
