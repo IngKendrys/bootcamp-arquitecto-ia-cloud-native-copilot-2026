@@ -130,15 +130,15 @@ APP_AUTH_PASSWORD=Password123
 ## Capturas de evidencia
 
 1. Home `/` con navegación.
-![Home](image.png)
+![Home](capturas/05.png)
 2. Redirección a `/login` al entrar a ruta protegida.
-![Login](image-1.png)
+![Login](capturas/01.png)
 3. Dashboard protegido con listado de usuarios.
-![Dashborad protegido mostrando el listado de usuarios](image-4.png)
+![Dashborad protegido mostrando el listado de usuarios](capturas/04.png)
 4. Formulario de alta creando usuario exitosamente.
-![Formulario con usuario creado exitosamente](image-2.png)
+![Formulario con usuario creado exitosamente](capturas/02.png)
 5. `npm run dev` en verde.
-![npm run dev corriendo bien](image-3.png)
+![npm run dev corriendo bien](capturas/03.png)
 
 ---
 

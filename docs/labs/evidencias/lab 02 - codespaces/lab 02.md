@@ -41,14 +41,14 @@ Plantilla seleccionada (dotent10-api) se ejecute correctamente.
 ## Resultado obtenido
 ## Paso 2:
 Todas las herramientas bases instaladas correctamente.
-![Verificación de herramientas bases](image.png)
+![Verificación de herramientas bases](capturas/03.png)
 
 ## Paso 3: 
 La plantilla seleccionada se ejecutó correctamente en los puertos. 
-![Captura de la plantilla corriendo en los puertos](image-1.png)
+![Captura de la plantilla corriendo en los puertos](capturas/01.png)
 
 Plantilla ejecutada correctamente 
-![Captura de lo que muestra la plantilla en el puerto](image-2.png)
+![Captura de lo que muestra la plantilla en el puerto](capturas/02.png)
 
 ## Problemas y solución
 ## Problema

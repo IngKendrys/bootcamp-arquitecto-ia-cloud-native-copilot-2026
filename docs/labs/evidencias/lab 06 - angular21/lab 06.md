@@ -84,16 +84,16 @@ uvicorn app.main:app --reload --port 5000
 ### Evidencia
 
 - Terminal con `npm run build` exitoso.
-![npm run build](image.png)
+![npm run build](capturas/12.png)
 - Pantalla de autenticación (login).
-![Autenticando](image-2.png)
+![Autenticando](capturas/04.png)
 - Pantalla mostrando error manejado por la UI.
-![Error](image-1.png)
+![Error](capturas/01.png)
 - Pantalla de creación de usuario.
-![Creando usuario](image-9.png)
-![Usuario creado](image-10.png)
+![Creando usuario](capturas/11.png)
+![Usuario creado](capturas/02.png)
 - Pantalla principal de la app.
-![Home](image-8.png)
+![Home](capturas/10.png)
 
 ---
 
@@ -116,13 +116,13 @@ uvicorn app.main:app --reload --port 5000
 ## Capturas o logs
 
 1. App Angular iniciada (pantalla principal).
-![Home](image-8.png)
+![Home](capturas/10.png)
 2. Login / autenticación.
-![Login](image-2.png)
+![Login](capturas/04.png)
 3. Usuario creado correctamente.
-![Creando usuario](image-10.png)
+![Creando usuario](capturas/02.png)
 4. Listado con paginación funcionando.
-![Listado paginación funcionando](image-11.png)
+![Listado paginación funcionando](capturas/03.png)
 
 ---
 
@@ -132,26 +132,26 @@ uvicorn app.main:app --reload --port 5000
 2. Se configuró la URL base de API en `src/environments/environment.ts`.
 3. Se crearon servicios de acceso API:
    - `auth-api.service.ts` para login.
-   ![Captura del código de auth api](image-3.png)
+   ![Captura del código de auth api](capturas/05.png)
    - `users-api.service.ts` para registro y listado.
-   ![Captura del código de users api](image-4.png)
+   ![Captura del código de users api](capturas/06.png)
 4. Se implementó interceptor HTTP global para normalizar errores.
-   ![Interceptor](image-7.png)
+   ![Interceptor](capturas/09.png)
 5. Se modelaron contratos (`User`, `LoginRequest`, `LoginResponse`, etc.).
 6. Se implementó `UsersStore` con Signals para:
    - estado de autenticación,
    - carga de usuarios,
    - mensajes de error,
    - paginación.
-   ![Signals](image-5.png)
+   ![Signals](capturas/07.png)
 7. Se construyó `UsersDashboardComponent` con:
    - formulario de login,
    - formulario de creación,
    - listado de usuarios paginado,
    - feedback visual de estados.
-   ![Angular](image-6.png)
+   ![Angular](capturas/08.png)
 8. Se conectó ruteo principal para mostrar el dashboard por defecto.
 9. Se ejecutó `npm run build` para validación técnica.
-![npm run build](image.png)
+![npm run build](capturas/12.png)
 10. Se documentó la evidencia del lab.
 

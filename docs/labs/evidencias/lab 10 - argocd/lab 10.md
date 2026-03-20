@@ -16,14 +16,14 @@ kubectl get ns
 ```bash
 kubectl get nodes -o wide
 ```
-![Respuesta exitosa del cluster activo](capturas/image.png)
+![Respuesta exitosa del cluster activo](capturas/05.png)
 
 ### Paso 2: Verificar Argo CD desplegado
 ```bash
 kubectl -n argocd get pods,svc
 ```
 #### Verificación de la lista de pods de Argo CD en estado running
-![Captura de la verificación](capturas/image-1.png)
+![Captura de la verificación](capturas/01.png)
 
 ### Paso 3: Aplicar/actualizar recurso Application
 ```bash
@@ -54,7 +54,7 @@ Datos de login:
 - Password: valor del comando anterior.
 
 Vista en el navegador: 
-![Argo en el navegador](capturas/image-2.png)
+![Argo en el navegador](capturas/02.png)
 
 ### Paso 7: Ejecutar prueba GitOps (cambio en Git)
 Se modificó el manifiesto de frontend para provocar cambio declarativo (escala de réplicas).
@@ -65,7 +65,7 @@ git commit -m "lab10: gitops resync test"
 git push origin lab-10
 ```
 Evidencia del commit/push: 
-![Commit en github](capturas/image-3.png)
+![Commit en github](capturas/03.png)
 
 ### Paso 8: Validar resincronización en Argo CD
 ```bash
@@ -78,7 +78,7 @@ kubectl -n app get deploy app-next -o jsonpath='replicas={.spec.replicas},ready=
 kubectl -n app get pods -l app=app-next
 ```
 Resultado:
-![Resultado de replicas](capturas/image-4.png)
+![Resultado de replicas](capturas/04.png)
 
 ### Propmt utilizado
 Generame la administración de despliegues declarativos sincronizados desde GIT, es decir, GitOPS con Argo CD, siguiendo el paso a paso de crear recurso Aplication de argo CD, apuntando al repositorio y rama objetivo, habilita sync policy según estrategia, verifica estado Synced y Healthy y al finalizar, pruebas de cambio en git y resincronización.

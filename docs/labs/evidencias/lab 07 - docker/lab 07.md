@@ -154,7 +154,7 @@ curl -X POST http://127.0.0.1:5000/api/auth/login \
   -w "\nHTTP Status: %{http_code}\n"
 
 ##### Resultado
-![Test de login](image.png)
+![Test de login](capturas/03.png)
 
 
 # Test 2: Register nuevo usuario
@@ -164,14 +164,14 @@ curl -X POST http://127.0.0.1:5000/api/auth/register \
   -w "\nHTTP Status: %{http_code}\n"
 
 ##### Resultado
-![Test de register](image-1.png)
+![Test de register](capturas/01.png)
 
 # Test 3: Frontend (debe retornar HTML)
 curl -X GET http://127.0.0.1:8081/ \
   -w "\nHTTP Status: %{http_code}\n"
 
 ##### Resultado
-![Test Frontend](image-2.png)
+![Test Frontend](capturas/02.png)
 
 
 # Limpiar contenedores

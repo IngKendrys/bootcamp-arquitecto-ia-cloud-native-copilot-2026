@@ -93,7 +93,7 @@ cd /workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/fastap
 ```
 
 Resultado real:
-![Resultado de las pruebas ejecutadas](image.png)
+![Resultado de las pruebas ejecutadas](capturas/11.png)
 
 Cobertura funcional verificada por tests:
 - `test_health` (healthcheck)
@@ -117,10 +117,10 @@ Cobertura funcional verificada por tests:
 - Rutas y contrato OpenAPI habilitados en la aplicación FastAPI. Evidencia visual pendiente de captura en `/docs`.
 
 - URL: `http://127.0.0.1:8000/docs`
-![Pantalla de Swagger mostrando rutas](image-1.png)
+![Pantalla de Swagger mostrando rutas](capturas/01.png)
 
 - URL JSON: `http://127.0.0.1:8000/openapi.json`
-![Pantalla del json de OpenAPI](image-2.png)
+![Pantalla del json de OpenAPI](capturas/03.png)
 
 ---
 
@@ -137,7 +137,7 @@ curl -i http://127.0.0.1:8000/health
 **Resultado obtenido:**
 - Validado por prueba `test_health`: status `200` y payload con estado `ok`.
 
-![Terminal mostrando status "200 OK"](image-3.png)
+![Terminal mostrando status "200 OK"](capturas/04.png)
 
 ---
 
@@ -156,21 +156,21 @@ curl -i -X POST http://127.0.0.1:8000/items \
 	-d '{"name":"Laptop","description":"Equipo de trabajo","price":1499.99,"stock":4}'
 ```
 ##### Respuesta
-![Captura de la respuesta del curl de crear item](image-4.png)
+![Captura de la respuesta del curl de crear item](capturas/05.png)
 
 #### 3.2 Listar items
 ```bash
 curl -i http://127.0.0.1:8000/items
 ```
 ##### Respuesta
-![Captura del curl de listar items](image-5.png)
+![Captura del curl de listar items](capturas/06.png)
 
 #### 3.3 Obtener item por id
 ```bash
 curl -i http://127.0.0.1:8000/items/1
 ```
 ##### Respuesta
-![Captura del curl de obtener item por id](image-6.png)
+![Captura del curl de obtener item por id](capturas/07.png)
 
 #### 3.4 Actualizar item
 ```bash
@@ -179,14 +179,14 @@ curl -i -X PUT http://127.0.0.1:8000/items/1 \
 	-d '{"price":1599.99,"stock":3}'
 ```
 ##### Respuesta
-![Captura del curl de actualizar item](image-7.png)
+![Captura del curl de actualizar item](capturas/08.png)
 
 #### 3.5 Eliminar item
 ```bash
 curl -i -X DELETE http://127.0.0.1:8000/items/1
 ```
 ##### Respuesta 
-![Captura del curl del eliminar item](image-8.png)
+![Captura del curl del eliminar item](capturas/09.png)
 
 ---
 
@@ -205,14 +205,14 @@ curl -i -X POST http://127.0.0.1:8000/items \
 	-d '{"name":"A","price":-10,"stock":-1}'
 ```
 ##### Respuesta
-![Respuesta del curl de error de validación](image-9.png)
+![Respuesta del curl de error de validación](capturas/10.png)
 
 #### 4.2 Item inexistente (404)
 ```bash
 curl -i http://127.0.0.1:8000/items/99999
 ```
 ##### Respuesta
-![Respuesta del curl de item inexistente](image-10.png)
+![Respuesta del curl de item inexistente](capturas/02.png)
 
 ---
 

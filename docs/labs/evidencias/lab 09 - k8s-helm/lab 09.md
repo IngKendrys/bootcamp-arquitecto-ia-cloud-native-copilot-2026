@@ -91,12 +91,12 @@ kubectl get svc -n app api-dotnet -o jsonpath='{.spec.type}{"\n"}'
 
 ### Smoke test app ingress
 
-![Resultado del frontend del curl](image.png)
+![Resultado del frontend del curl](capturas/03.png)
 
-![Resultado del curl](image-1.png)
+![Resultado del curl](capturas/01.png)
 
 ### Frontend corriendo
-![Frontend corriendo](image-2.png)
+![Frontend corriendo](capturas/02.png)
 
 ### Logs/indicadores clave
 - `deployment "api-dotnet" successfully rolled out`

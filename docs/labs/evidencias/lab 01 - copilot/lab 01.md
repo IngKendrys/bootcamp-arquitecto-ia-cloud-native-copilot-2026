@@ -114,7 +114,7 @@ integración endpoints (in-memory DB / test DB).
 ¡Gran noticia: ya tienes un endpoint inicial completo y explicada línea por línea! Dos objetivos cumplidos en un solo paso: estructura funcional y entendimiento profundo.
 
 1) Ejemplo en Node.js + Express (sencillo, enfoquémonos en la capa de presentación)
-![Captura del codigo del ejemplo en Node.js](image.png)
+![Captura del codigo del ejemplo en Node.js](capturas/13.png)
 🔍 Explicación línea por línea
 1. import express from 'express';
     - Carga el framework web Express.
@@ -154,12 +154,12 @@ integración endpoints (in-memory DB / test DB).
     - Exporta el router para montar en la app principal (app.use(router)).
 
 🧩 Capa de servicio asociada (para contexto completo)
-![Captura del codigo del servicio](image-1.png)
+![Captura del codigo del servicio](capturas/01.png)
 - getAllUsers separa la lógica de manejo del modelo/DTO.
 - Mapeo de entidad a salida segura (no devuelve contraseña).
 
 ⚙️ Integración en el servidor
-![Captura del codigo de la integración con el servidor](image-2.png)
+![Captura del codigo de la integración con el servidor](capturas/05.png)
 
 
 
@@ -178,30 +178,30 @@ Fantástico, el código ahora está ordenado en capas limpias y cada unidad tien
     - src/middlewares/validation.middleware.js — validación request
 
 2) src/routes/user.routes.js
-![Captura de la ruta de usuario refactorizada](image-3.png)
+![Captura de la ruta de usuario refactorizada](capturas/06.png)
 
 3) src/controllers/user.controller.js
-![Captura del controller de usuario](image-4.png)
+![Captura del controller de usuario](capturas/07.png)
 - Controller: solo recibe request y devuelve response.
 - No lógica de negocio ni DB.
 
 4) src/services/user.service.js
-![Captura del servicio de usuario](image-5.png)
+![Captura del servicio de usuario](capturas/08.png)
 - Servicio: interfaz UserService con reglas e mapeo a DTO.
 - Reutilizable y testeable.
 
 5) src/repositories/user.repository.js
-![Captura del repositorio de Usuario](image-6.png)
+![Captura del repositorio de Usuario](capturas/09.png)
 - Implementa contrato de persistencia.
 - Cambia DB fácil sin tocar capa de servicio.
 
 6) src/middlewares/error.middleware.js
-![Captura del middleware de error](image-7.png)
+![Captura del middleware de error](capturas/10.png)
 - Centraliza respuesta de error.
 - Registra logs consistente.
 
 7) src/app.js
-![Captura del codigo de app](image-8.png)
+![Captura del codigo de app](capturas/11.png)
 
 8) Cambios de legibilidad y mantenibilidad aplicados
     - rutas/código/salida separados.
@@ -221,19 +221,19 @@ Excelente noticia: ya tienes un conjunto de tests claros que cubren la lógica p
 - Si usas ESModules (import/export), añade en package.json:
 "type": "module" o usa Babel/tranpsiler adecuado
 2) Test de servicio (src/services/user.service.test.js)
-![Parte 1 del test de servicio](image-11.png)
-![Parte 2 del test de servicio](image-12.png)
+![Parte 1 del test de servicio](capturas/03.png)
+![Parte 2 del test de servicio](capturas/04.png)
 - Verifica que la paginación se traduce a offset.
 - Verifica mapeo DTO y exclusión de datos sensibles.
 
 3)  Test de controller (src/controllers/user.controller.test.js)
-![Captura del controller](image-10.png)
+![Captura del controller](capturas/02.png)
 
 - Controla la respuesta exitosa y el camino de error.
 - Asegura next(error) se invoca para middleware global.
 
 4) Test de integración (opcional, src/__tests__/app.integration.test.js)
-![Captura del codigo del test de integración](image-9.png)
+![Captura del codigo del test de integración](capturas/12.png)
 - Asegura la ruta y middleware se integran correctamente.
 - Usa supertest para simulación real HTTP.
 
