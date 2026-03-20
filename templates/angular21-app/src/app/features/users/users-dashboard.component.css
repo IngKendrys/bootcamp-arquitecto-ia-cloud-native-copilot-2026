@@ -1,0 +1,110 @@
+.stack {
+  display: grid;
+  gap: 16px;
+}
+
+.card {
+  border: 1px solid #dbe4f0;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.form-grid {
+  display: grid;
+  gap: 8px;
+  max-width: 440px;
+}
+
+label {
+  font-size: 0.92rem;
+  color: #1f2937;
+}
+
+input {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+input:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 1px;
+}
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  color: #ffffff;
+  background: #2563eb;
+  font-weight: 600;
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #1f2937;
+  border-color: #cbd5e1;
+}
+
+.muted {
+  color: #64748b;
+}
+
+.status-error {
+  color: #dc2626;
+}
+
+.status-info {
+  color: #2563eb;
+  margin-top: 10px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.users-list {
+  list-style: none;
+  margin: 12px 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.user-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-item p {
+  margin: 4px 0 0;
+}
+
+.pill {
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  background: #f8fafc;
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
