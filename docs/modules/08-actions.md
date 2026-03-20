@@ -100,5 +100,14 @@ Entregar imágenes versionadas para Helm/Argo CD en Labs 09 y 10.
 
 ---
 
-**Teoría completada:** Lab 08 - GitHub Actions CI/CD  
-**Nivel:** Fundamentos de automatización para flujo cloud-native
+
+---
+
+## Laboratorio
+
+# GitHub Actions - CI/CD + Environments
+
+- Matrices, cache, artefactos, **environments (dev/stage/prod)** con approvals.  
+- Reutilización de workflows.
+
+**Ver lab08-actions.md**.

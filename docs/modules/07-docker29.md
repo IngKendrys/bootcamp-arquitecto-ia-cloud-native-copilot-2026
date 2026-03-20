@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 # Docker y GitHub Container Registry - Teoría
 
 ## ¿Qué es Docker?
@@ -268,3 +275,18 @@ Dev, staging y producción usan exactamente la misma imagen.
 
 ### Kubernetes
 Orquestación de contenedores a escala (tema Lab 09).
+
+---
+
+## Laboratorio
+
+# Docker 29 y GHCR
+
+- Multi-stage non-root, capas mínimas, *buildx* multiplataforma.  
+- Publicación en **GHCR** y política de tags/labels.
+
+## Novedades clave
+- buildx más sólido para escenarios multiplataforma.
+- Mejora de capacidades para seguridad y supply chain.
+
+**Ver lab07-docker-ghcr.md**.
