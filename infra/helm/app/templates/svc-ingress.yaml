@@ -3,14 +3,14 @@ kind: Service
 metadata: { name: app-next }
 spec:
   selector: { app: app-next }
-  ports: [{ port: {{ .Values.service.port }}, targetPort: 3000 }]
+  ports: [{ port: {{ .Values.service.port }}, targetPort: {{ .Values.frontend.containerPort }} }]
 ---
 apiVersion: v1
 kind: Service
 metadata: { name: api-dotnet }
 spec:
   selector: { app: api-dotnet }
-  ports: [{ port: {{ .Values.service.port }}, targetPort: 8080 }]
+  ports: [{ port: {{ .Values.service.port }}, targetPort: {{ .Values.backend.containerPort }} }]
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
