@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: { name: app-next }
 spec:
-  replicas: 2
+  replicas: 1
   selector: { matchLabels: { app: app-next } }
   template:
     metadata: { labels: { app: app-next } }
