@@ -1,0 +1,31 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: backend-rate-limit
+  namespace: app
+plugin: rate-limiting
+config:
+  minute: 30
+  policy: local
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-dotnet-kong
+  namespace: app
+  annotations:
+    konghq.com/strip-path: "false"
+    konghq.com/plugins: backend-rate-limit
+spec:
+  ingressClassName: kong
+  rules:
+    - host: kong.local
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: api-dotnet
+                port:
+                  number: 80
