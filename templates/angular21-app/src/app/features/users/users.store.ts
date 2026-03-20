@@ -1,24 +1,22 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { finalize } from 'rxjs';
 import { ApiError } from '../../core/http/api-error.model';
-import { AuthApiService } from '../../core/services/auth-api.service';
+import { OidcAuthService } from '../../core/services/oidc-auth.service';
 import { UsersApiService } from '../../core/services/users-api.service';
-import { LoginRequest, RegisterUserRequest, User } from './user.model';
+import { RegisterUserRequest, User } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UsersStore {
-  private readonly authApi = inject(AuthApiService);
+  private readonly oidcAuth = inject(OidcAuthService);
   private readonly usersApi = inject(UsersApiService);
 
-  readonly token = signal<string | null>(null);
   readonly users = signal<User[]>([]);
   readonly loading = signal(false);
-  readonly authenticating = signal(false);
   readonly creating = signal(false);
 
   readonly authError = signal<string | null>(null);
   readonly usersError = signal<string | null>(null);
-  readonly formMessage = signal<string>('Completa el formulario para crear un usuario.');
+  readonly formMessage = signal<string>('Inicia sesión con OIDC para gestionar usuarios.');
 
   readonly page = signal(1);
   readonly pageSize = signal(5);
@@ -33,34 +31,34 @@ export class UsersStore {
   readonly canPrevPage = computed(() => this.page() > 1);
   readonly canNextPage = computed(() => this.page() < this.totalPages());
 
-  login(payload: LoginRequest): void {
+  readonly authenticating = computed(() => this.oidcAuth.initializing());
+  readonly isAuthenticated = computed(() => this.oidcAuth.isAuthenticated());
+  readonly username = computed(() => this.oidcAuth.username());
+
+  async initializeSession(): Promise<void> {
+    await this.oidcAuth.initializeSession();
+    this.authError.set(this.oidcAuth.authError());
+
+    if (this.isAuthenticated()) {
+      this.formMessage.set('Sesión OIDC activa. Ya puedes listar y crear usuarios.');
+      this.fetchUsers();
+    }
+  }
+
+  loginWithOidc(): void {
     this.authError.set(null);
-    this.authenticating.set(true);
+    this.oidcAuth.login();
+  }
 
-    this.authApi
-      .login(payload)
-      .pipe(finalize(() => this.authenticating.set(false)))
-      .subscribe({
-        next: (response) => {
-          const token = response.token || response.access_token;
-          if (!token) {
-            this.authError.set('La API no devolvió token de autenticación.');
-            return;
-          }
-
-          this.token.set(token);
-          this.formMessage.set('Autenticación exitosa. Ya puedes listar y crear usuarios.');
-          this.fetchUsers();
-        },
-        error: (error: ApiError) => {
-          this.authError.set(error.message);
-        },
-      });
+  logout(): void {
+    this.oidcAuth.logout();
+    this.users.set([]);
+    this.usersError.set(null);
+    this.formMessage.set('Sesión cerrada. Inicia sesión para continuar.');
   }
 
   fetchUsers(): void {
-    const token = this.token();
-    if (!token) {
+    if (!this.isAuthenticated()) {
       this.usersError.set('Inicia sesión para listar usuarios.');
       return;
     }
@@ -69,7 +67,7 @@ export class UsersStore {
     this.loading.set(true);
 
     this.usersApi
-      .listUsers(token)
+      .listUsers()
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: (users) => {
@@ -84,6 +82,11 @@ export class UsersStore {
   }
 
   createUser(payload: RegisterUserRequest): void {
+    if (!this.isAuthenticated()) {
+      this.formMessage.set('Debes iniciar sesión para crear usuarios.');
+      return;
+    }
+
     this.creating.set(true);
     this.formMessage.set('Creando usuario...');
 
@@ -99,6 +102,11 @@ export class UsersStore {
           const duplicateUser = error.status === 400 && /usuario existe/i.test(error.message);
           if (duplicateUser) {
             this.formMessage.set('No se pudo crear: el username ya existe. Usa uno diferente.');
+            return;
+          }
+
+          if (error.status === 403) {
+            this.formMessage.set('No autorizado por rol para crear usuarios (403).');
             return;
           }
 

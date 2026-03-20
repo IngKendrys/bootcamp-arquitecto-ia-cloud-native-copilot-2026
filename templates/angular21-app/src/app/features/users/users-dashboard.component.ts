@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersStore } from './users.store';
 
@@ -10,27 +10,25 @@ import { UsersStore } from './users.store';
   templateUrl: './users-dashboard.component.html',
   styleUrl: './users-dashboard.component.css',
 })
-export class UsersDashboardComponent {
+export class UsersDashboardComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   readonly store = inject(UsersStore);
-
-  readonly loginForm = this.fb.nonNullable.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-  });
 
   readonly createForm = this.fb.nonNullable.group({
     username: ['', [Validators.required, Validators.minLength(3)]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  submitLogin(): void {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
+  async ngOnInit(): Promise<void> {
+    await this.store.initializeSession();
+  }
 
-    this.store.login(this.loginForm.getRawValue());
+  loginWithOidc(): void {
+    this.store.loginWithOidc();
+  }
+
+  logout(): void {
+    this.store.logout();
   }
 
   submitCreate(): void {

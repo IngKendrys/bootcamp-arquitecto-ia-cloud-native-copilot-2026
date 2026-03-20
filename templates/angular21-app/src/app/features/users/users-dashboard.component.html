@@ -2,94 +2,95 @@
   <section class="card">
     <h1>Angular 21 + Signals - Usuarios</h1>
     <p class="muted">
-      Este frontend consume los mismos endpoints del frontend NextJS:
-      <code>/api/auth/login</code>, <code>/api/auth/register</code> y <code>/api/users</code>.
+      Login federado por OIDC (Authorization Code + PKCE). Después de autenticar,
+      se habilita alta de usuarios y listado paginado.
     </p>
   </section>
 
   <section class="card">
-    <h2>1) Obtener JWT (Login backend)</h2>
-    <form class="form-grid" [formGroup]="loginForm" (ngSubmit)="submitLogin()">
-      <label for="login-username">Usuario</label>
-      <input id="login-username" type="text" formControlName="username" placeholder="admin" />
+    <h2>1) Login OIDC</h2>
 
-      <label for="login-password">Password</label>
-      <input id="login-password" type="password" formControlName="password" placeholder="Password123" />
-
-      <button class="btn" type="submit" [disabled]="store.authenticating()">
-        {{ store.authenticating() ? 'Autenticando...' : 'Iniciar sesión' }}
+    @if (!store.isAuthenticated()) {
+      <button class="btn" type="button" (click)="loginWithOidc()" [disabled]="store.authenticating()">
+        {{ store.authenticating() ? 'Inicializando OIDC...' : 'Iniciar sesión con OIDC' }}
       </button>
-    </form>
+      <p class="muted">Proveedor inicial sugerido: Keycloak (realm <code>bootcamp</code>).</p>
+    } @else {
+      <p class="status-info">Sesión iniciada como <strong>{{ store.username() ?? 'usuario autenticado' }}</strong>.</p>
+      <button class="btn btn-secondary" type="button" (click)="logout()">Cerrar sesión</button>
+    }
 
     @if (store.authError()) {
       <p class="status-error" role="alert">{{ store.authError() }}</p>
     }
   </section>
 
-  <section class="card">
-    <h2>2) Alta de usuario</h2>
-    <form class="form-grid" [formGroup]="createForm" (ngSubmit)="submitCreate()">
-      <label for="create-username">Username</label>
-      <input
-        id="create-username"
-        type="text"
-        formControlName="username"
-        placeholder="nuevo.usuario"
-      />
-      @if (createForm.controls.username.touched && createForm.controls.username.invalid) {
-        <small class="status-error">Username mínimo 3 caracteres.</small>
-      }
-
-      <label for="create-password">Password</label>
-      <input id="create-password" type="password" formControlName="password" placeholder="******" />
-      @if (createForm.controls.password.touched && createForm.controls.password.invalid) {
-        <small class="status-error">Password mínimo 6 caracteres.</small>
-      }
-
-      <button class="btn" type="submit" [disabled]="store.creating()">
-        {{ store.creating() ? 'Creando...' : 'Crear usuario' }}
-      </button>
-    </form>
-
-    <p class="status-info">{{ store.formMessage() }}</p>
-  </section>
-
-  <section class="card">
-    <div class="header-actions">
-      <h2>3) Listado de usuarios (paginación)</h2>
-      <button class="btn btn-secondary" type="button" (click)="store.fetchUsers()" [disabled]="store.loading()">
-        {{ store.loading() ? 'Consultando...' : 'Recargar' }}
-      </button>
-    </div>
-
-    @if (store.usersError()) {
-      <p class="status-error" role="alert">{{ store.usersError() }}</p>
-    } @else if (store.loading()) {
-      <p class="muted">Cargando usuarios...</p>
-    } @else if (store.totalUsers() === 0) {
-      <p class="muted">No hay usuarios para mostrar.</p>
-    } @else {
-      <ul class="users-list">
-        @for (user of store.pagedUsers(); track user.id) {
-          <li class="user-item">
-            <div>
-              <strong>{{ user.username }}</strong>
-              <p class="muted">ID: {{ user.id }}</p>
-            </div>
-            <span class="pill">{{ user.role }}</span>
-          </li>
+  @if (store.isAuthenticated()) {
+    <section class="card">
+      <h2>2) Alta de usuario</h2>
+      <form class="form-grid" [formGroup]="createForm" (ngSubmit)="submitCreate()">
+        <label for="create-username">Username</label>
+        <input
+          id="create-username"
+          type="text"
+          formControlName="username"
+          placeholder="nuevo.usuario"
+        />
+        @if (createForm.controls.username.touched && createForm.controls.username.invalid) {
+          <small class="status-error">Username mínimo 3 caracteres.</small>
         }
-      </ul>
 
-      <div class="pager">
-        <button class="btn btn-secondary" type="button" (click)="store.prevPage()" [disabled]="!store.canPrevPage()">
-          Anterior
+        <label for="create-password">Password</label>
+        <input id="create-password" type="password" formControlName="password" placeholder="******" />
+        @if (createForm.controls.password.touched && createForm.controls.password.invalid) {
+          <small class="status-error">Password mínimo 6 caracteres.</small>
+        }
+
+        <button class="btn" type="submit" [disabled]="store.creating()">
+          {{ store.creating() ? 'Creando...' : 'Crear usuario' }}
         </button>
-        <span>Página {{ store.page() }} de {{ store.totalPages() }}</span>
-        <button class="btn btn-secondary" type="button" (click)="store.nextPage()" [disabled]="!store.canNextPage()">
-          Siguiente
+      </form>
+
+      <p class="status-info">{{ store.formMessage() }}</p>
+    </section>
+
+    <section class="card">
+      <div class="header-actions">
+        <h2>3) Listado de usuarios (paginación)</h2>
+        <button class="btn btn-secondary" type="button" (click)="store.fetchUsers()" [disabled]="store.loading()">
+          {{ store.loading() ? 'Consultando...' : 'Recargar' }}
         </button>
       </div>
-    }
-  </section>
+
+      @if (store.usersError()) {
+        <p class="status-error" role="alert">{{ store.usersError() }}</p>
+      } @else if (store.loading()) {
+        <p class="muted">Cargando usuarios...</p>
+      } @else if (store.totalUsers() === 0) {
+        <p class="muted">No hay usuarios para mostrar.</p>
+      } @else {
+        <ul class="users-list">
+          @for (user of store.pagedUsers(); track user.id) {
+            <li class="user-item">
+              <div>
+                <strong>{{ user.username }}</strong>
+                <p class="muted">ID: {{ user.id }}</p>
+              </div>
+              <span class="pill">{{ user.role }}</span>
+            </li>
+          }
+        </ul>
+
+        <div class="pager">
+          <button class="btn btn-secondary" type="button" (click)="store.prevPage()" [disabled]="!store.canPrevPage()">
+            Anterior
+          </button>
+          <span>Página {{ store.page() }} de {{ store.totalPages() }}</span>
+          <button class="btn btn-secondary" type="button" (click)="store.nextPage()" [disabled]="!store.canNextPage()">
+            Siguiente
+          </button>
+        </div>
+      }
+    </section>
+  }
 </section>
