@@ -1,4 +1,4 @@
-﻿# Módulo 14 - Identidad Federada, SSO y OIDC (Entra ID, Google y Keycloak)
+﻿# Módulo 18 - Identidad Federada, SSO y OIDC (Entra ID, Google y Keycloak)
 
 ## Objetivo
 Diseñar e implementar autenticación y autorización empresarial con SSO, usando OIDC contra tres proveedores:
