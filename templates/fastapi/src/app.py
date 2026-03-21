@@ -5,24 +5,11 @@ from fastapi import Depends, FastAPI, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
-from sqlalchemy import DateTime, Float, Integer, String, create_engine, func, select, text
+from sqlalchemy import create_engine, select, text
 from sqlalchemy.exc import IntegrityError
-from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
+from sqlalchemy.orm import Session, sessionmaker
 
-
-class Base(DeclarativeBase):
-    pass
-
-
-class Item(Base):
-    __tablename__ = "items"
-
-    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(100), unique=True, nullable=False)
-    description: Mapped[str | None] = mapped_column(String(500), nullable=True)
-    price: Mapped[float] = mapped_column(Float, nullable=False)
-    stock: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+from src.models import Base, Item
 
 
 class ItemCreate(BaseModel):
@@ -30,6 +17,7 @@ class ItemCreate(BaseModel):
     description: str | None = Field(default=None, max_length=500)
     price: float = Field(gt=0)
     stock: int = Field(ge=0)
+    status: str = Field(default="active", min_length=3, max_length=20)
 
 
 class ItemUpdate(BaseModel):
@@ -37,6 +25,7 @@ class ItemUpdate(BaseModel):
     description: str | None = Field(default=None, max_length=500)
     price: float | None = Field(default=None, gt=0)
     stock: int | None = Field(default=None, ge=0)
+    status: str | None = Field(default=None, min_length=3, max_length=20)
 
 
 class ItemOut(BaseModel):
@@ -47,6 +36,7 @@ class ItemOut(BaseModel):
     description: str | None
     price: float
     stock: int
+    status: str
     created_at: datetime
 
 
@@ -128,6 +118,7 @@ def create_app(database_url: str | None = None) -> FastAPI:
             description=payload.description,
             price=payload.price,
             stock=payload.stock,
+            status=payload.status,
         )
         db.add(item)
         try:
