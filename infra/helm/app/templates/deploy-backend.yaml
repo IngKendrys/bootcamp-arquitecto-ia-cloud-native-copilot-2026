@@ -7,15 +7,11 @@ spec:
   template:
     metadata: { labels: { app: api-dotnet } }
     spec:
-      imagePullSecrets:
-      {{- range .Values.imagePullSecrets }}
-      - name: {{ .name }}
-      {{- end }}
       containers:
       - name: api
         image: {{ .Values.backend.image }}
-        ports: [{containerPort: {{ .Values.backend.containerPort }} }]
+        ports: [{containerPort: 8080}]
         readinessProbe:
-          tcpSocket: { port: {{ .Values.backend.containerPort }} }
+          httpGet: { path: /health, port: 8080 }
           initialDelaySeconds: 5
           periodSeconds: 10

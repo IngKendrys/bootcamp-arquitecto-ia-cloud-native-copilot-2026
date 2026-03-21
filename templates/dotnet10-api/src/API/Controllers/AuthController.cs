@@ -15,7 +15,7 @@ public class AuthController : ControllerBase {
     private readonly JwtService _jwt;
     public AuthController(AppDbContext db, JwtService jwt){_db=db;_jwt=jwt;}
 
-    [HttpPost("register"), Authorize(Policy = "CanManageUsers")]
+    [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto input) {
         if (await _db.Users.AnyAsync(u => u.Username == input.Username)) return BadRequest("Usuario existe");
         var user = new User { Username = input.Username, PasswordHash = BCrypt.Net.BCrypt.HashPassword(input.Password) };
@@ -23,7 +23,7 @@ public class AuthController : ControllerBase {
         return Ok(new { user.Id, user.Username });
     }
 
-    [HttpPost("login"), AllowAnonymous]
+    [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto input){
         var user = await _db.Users.SingleOrDefaultAsync(u => u.Username == input.Username);
         if (user == null || !BCrypt.Net.BCrypt.Verify(input.Password, user.PasswordHash))

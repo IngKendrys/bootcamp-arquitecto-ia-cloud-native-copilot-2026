@@ -2,16 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata: { name: app-next }
 spec:
-  replicas: 1
+  replicas: 2
   selector: { matchLabels: { app: app-next } }
   template:
     metadata: { labels: { app: app-next } }
     spec:
-      imagePullSecrets:
-      {{- range .Values.imagePullSecrets }}
-      - name: {{ .name }}
-      {{- end }}
       containers:
       - name: web
         image: {{ .Values.frontend.image }}
-        ports: [{containerPort: {{ .Values.frontend.containerPort }} }]
+        ports: [{containerPort: 3000}]

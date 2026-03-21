@@ -1,6 +1,2 @@
-apiVersion: v2
 name: enrollmenthub
-description: Helm chart para desplegar backend .NET y frontend Angular
-type: application
 version: 0.1.0
-appVersion: "1.0.0"

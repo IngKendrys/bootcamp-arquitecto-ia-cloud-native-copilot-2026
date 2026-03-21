@@ -3,21 +3,14 @@ kind: Application
 metadata:
   name: enrollmenthub
   namespace: argocd
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/IngKendrys/bootcamp-arquitecto-ia-cloud-native-copilot-2026.git
-    targetRevision: lab-10
+    repoURL: https://github.com/OWNER/REPO.git
+    targetRevision: main
     path: infra/helm/app
   destination:
     server: https://kubernetes.default.svc
     namespace: app
   syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
-    syncOptions:
-      - CreateNamespace=true
-      - ApplyOutOfSyncOnly=true
+    automated: { selfHeal: true, prune: true }

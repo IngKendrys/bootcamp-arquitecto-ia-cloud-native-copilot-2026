@@ -6,8 +6,7 @@ WORKDIR /src
 COPY ./src ./
 RUN dotnet restore && dotnet publish -c Release -o /out
 FROM base
-COPY --from=build --chown=10001:10001 /out .
-RUN touch /app/data.db && chown -R 10001:10001 /app
 USER 10001
+COPY --from=build /out .
 ENV ASPNETCORE_URLS=http://+:8080
 ENTRYPOINT ["dotnet","Api.dll"]
