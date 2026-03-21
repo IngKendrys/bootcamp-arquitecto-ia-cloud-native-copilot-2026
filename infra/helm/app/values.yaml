@@ -1,6 +1,10 @@
 backend:
-  image: ghcr.io/OWNER/enrollmenthub-backend:latest
+  image: ghcr.io/ingkendrys/backend:lab07
+  containerPort: 8080
 frontend:
-  image: ghcr.io/OWNER/enrollmenthub-frontend:latest
+  image: ghcr.io/ingkendrys/frontend-angular:lab07
+  containerPort: 80
+imagePullSecrets:
+  - name: ghcr-creds
 service:
   port: 80
