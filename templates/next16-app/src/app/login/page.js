@@ -1,10 +1,12 @@
 import LoginForm from "./login-form"
-import { loginAction } from "./actions"
 
-export default function LoginPage() {
+export default async function LoginPage({ searchParams }) {
+  const params = await searchParams
+  const callbackUrl = params?.callbackUrl || "/dashboard"
+
   return (
     <section className="stack">
-      <LoginForm action={loginAction} />
+      <LoginForm callbackUrl={callbackUrl} />
     </section>
   )
 }

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { cookies } from "next/headers"
+import { auth, signOut } from "../auth"
 import "./globals.css"
 
 export const metadata = {
@@ -8,13 +8,13 @@ export const metadata = {
 }
 
 export default async function RootLayout({ children }) {
-  const cookieStore = await cookies()
-  const isAuthenticated = cookieStore.get("lab05_session")?.value === "ok"
+  const session = await auth()
+  const isAuthenticated = Boolean(session)
+  const roles = session?.user?.roles || []
 
   async function logoutAction() {
     "use server"
-    const serverCookies = await cookies()
-    serverCookies.delete("lab05_session")
+    await signOut({ redirectTo: "/" })
   }
 
   return (
@@ -26,10 +26,15 @@ export default async function RootLayout({ children }) {
               <strong className="brand">EnrollmentHub</strong>
               <Link href="/">Inicio</Link>
               <Link href="/dashboard">Dashboard</Link>
+              {roles.map((role) => String(role).toLowerCase()).includes("admin") && (
+                <Link href="/dashboard/admin">Admin</Link>
+              )}
             </div>
             <div className="nav-right">
               <span aria-live="polite" className="muted">
-                {isAuthenticated ? "Sesión local activa" : "No autenticado"}
+                {isAuthenticated
+                  ? `Sesión OIDC activa (${session?.user?.username || session?.user?.name || "usuario"})`
+                  : "No autenticado"}
               </span>
               {isAuthenticated ? (
                 <form action={logoutAction}>

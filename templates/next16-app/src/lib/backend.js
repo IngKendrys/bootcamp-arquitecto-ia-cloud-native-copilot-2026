@@ -1,4 +1,4 @@
-import { cookies } from "next/headers"
+import { auth } from "../auth"
 
 const API_BASE_URL = process.env.API_BASE_URL
 
@@ -11,15 +11,14 @@ function assertApiBaseUrl() {
 export async function fetchUsers() {
   assertApiBaseUrl()
 
-  // Obtener JWT token desde la cookie
-  const cookieStore = await cookies()
-  const token = cookieStore.get("lab05_jwt")?.value
+  const session = await auth()
+  const token = session?.accessToken
 
   if (!token) {
     return {
       ok: false,
       users: [],
-      error: "No hay sesión de JWT valida. Por favor inicia sesión primero.",
+      error: "No hay sesión OIDC válida. Inicia sesión con Keycloak.",
     }
   }
 
@@ -46,10 +45,20 @@ export async function fetchUsers() {
 export async function registerUser({ username, password }) {
   assertApiBaseUrl()
 
+  const session = await auth()
+  const token = session?.accessToken
+  if (!token) {
+    return {
+      ok: false,
+      error: "No hay sesión OIDC válida. Inicia sesión con Keycloak.",
+    }
+  }
+
   const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ username, password }),
     cache: "no-store",

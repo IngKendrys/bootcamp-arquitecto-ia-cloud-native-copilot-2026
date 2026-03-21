@@ -2,8 +2,18 @@
 
 import { revalidatePath } from "next/cache"
 import { registerUser } from "../../lib/backend"
+import { auth } from "../../auth"
 
 export async function createUserAction(prevState, formData) {
+  const session = await auth()
+  const roles = (session?.user?.roles ?? []).map((role) => String(role).toLowerCase())
+  if (!roles.includes("admin")) {
+    return {
+      ok: false,
+      message: "No autorizado: se requiere rol admin para crear usuarios",
+    }
+  }
+
   const username = (formData.get("username") || "").toString().trim()
   const password = (formData.get("password") || "").toString()
 
