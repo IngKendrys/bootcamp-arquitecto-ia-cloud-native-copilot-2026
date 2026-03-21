@@ -1,39 +1,27 @@
 "use client"
 
-import { useActionState } from "react"
-import { useFormStatus } from "react-dom"
+import { signIn } from "next-auth/react"
 
-const initialState = { ok: false, message: "" }
-
-function SubmitButton() {
-  const { pending } = useFormStatus()
-  return (
-    <button className="btn" type="submit" disabled={pending} aria-busy={pending}>
-      {pending ? "Ingresando..." : "Ingresar"}
-    </button>
-  )
-}
-
-export default function LoginForm({ action }) {
-  const [state, formAction] = useActionState(action, initialState)
+export default function LoginForm({ callbackUrl }) {
+  const targetCallbackUrl = callbackUrl || "/dashboard"
 
   return (
     <section className="card" style={{ maxWidth: 460 }}>
-      <h1>Acceso al dashboard</h1>
-      <p className="muted">Autenticación local para el laboratorio (sin OIDC).</p>
+      <h1>Acceso al dashboard con OIDC</h1>
+      <p className="muted">Usa Keycloak (NextAuth) para iniciar sesión y obtener claims/roles.</p>
 
-      <form action={formAction} className="form-grid">
-        <label htmlFor="username">Usuario</label>
-        <input id="username" name="username" type="text" required placeholder="admin" />
+      <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+        <button
+          type="button"
+          className="btn"
+          onClick={() => signIn("keycloak", { callbackUrl: targetCallbackUrl }, { prompt: "login" })}
+        >
+          Iniciar con Keycloak
+        </button>
+      </div>
 
-        <label htmlFor="password">Password</label>
-        <input id="password" name="password" type="password" required placeholder="Password123" />
-
-        <SubmitButton />
-      </form>
-
-      <p role="alert" className={state?.ok ? "status-ok" : "status-error"}>
-        {state?.message || "Ingresa con credenciales configuradas en .env.local"}
+      <p role="status" className="muted" style={{ marginTop: 10 }}>
+        Serás redirigido al proveedor OIDC y luego volverás a la aplicación.
       </p>
     </section>
   )

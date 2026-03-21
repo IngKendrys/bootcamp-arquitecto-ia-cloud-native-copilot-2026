@@ -13,9 +13,9 @@ export default function HomePage() {
       <h2>Checklist rápido</h2>
       <ol>
         <li>Configura variables en <code>.env.local</code>.</li>
-        <li>Inicia sesión local en <code>/login</code>.</li>
+        <li>Inicia sesión OIDC con Keycloak en <code>/login</code>.</li>
         <li>Abre el dashboard protegido.</li>
-        <li>Crea usuarios y valida listado/errores.</li>
+        <li>Valida claims/roles y control de acceso en UI.</li>
       </ol>
       </div>
       <div className="card">
