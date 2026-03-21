@@ -189,3 +189,5 @@
 /workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/bin/Debug/net10.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 /workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/bin/Debug/net10.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 /workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/bin/Debug/net10.0/appsettings.json
+/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/bin/Debug/net10.0/Prometheus.NetStandard.dll
+/workspaces/bootcamp-arquitecto-ia-cloud-native-copilot-2026/templates/dotnet10-api/src/bin/Debug/net10.0/Prometheus.AspNetCore.dll
