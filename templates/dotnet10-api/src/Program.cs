@@ -1,6 +1,7 @@
 using Dotnet10Api.Data;
 using Dotnet10Api.Models;
 using Dotnet10Api.Services;
+using Application;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -171,17 +172,7 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     db.Database.Migrate();
-
-    if (!db.Users.Any(u => u.Username == "admin"))
-    {
-        db.Users.Add(new User
-        {
-            Username = "admin",
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword("Password123"),
-            Role = "Admin"
-        });
-        db.SaveChanges();
-    }
+    await Seed.InitAsync(db);
 }
 
 if (app.Environment.IsDevelopment())

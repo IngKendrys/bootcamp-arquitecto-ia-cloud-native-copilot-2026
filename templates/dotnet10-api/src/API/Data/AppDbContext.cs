@@ -8,6 +8,7 @@ namespace Dotnet10Api.Data {
         public DbSet<User> Users => Set<User>();
         protected override void OnModelCreating(ModelBuilder builder) {
             builder.Entity<User>().HasIndex(u => u.Username).IsUnique();
+            builder.Entity<User>().Property(u => u.IsActive).HasDefaultValue(true);
         }
     }
 }
