@@ -1,12 +1,7 @@
-# Lab 12 - Data at Scale y optimizaciÃ³n
+# Lab 12 - Data at Scale y optimización
 
 ## Objetivo
-Evaluar y mejorar el rendimiento con volumen de datos realista, comparando resultados **antes vs despuÃ©s** en:
-- latencia de consultas clave,
-- plan de ejecuciÃ³n,
-- impacto de Ã­ndices,
-- impacto de cachÃ© de lectura con Redis,
-- y trade-offs tÃ©cnicos.
+Evalúar y mejorar rendimiento con volumen de datos realista.
 
 ## Prerrequisitos
 - Persistencia activa en PostgreSQL u otro motor.
@@ -14,20 +9,20 @@ Evaluar y mejorar el rendimiento con volumen de datos realista, comparando resul
 ## Paso a paso
 1. Carga dataset de volumen medio o alto.
 2. Mide latencia de consultas clave.
-3. Agrega ï¿½ndices y compara resultados.
-4. Evalï¿½a cache de lectura frecuente (Redis recomendado).
+3. Agrega índices y compara resultados.
+4. Evalúa cache de lectura frecuente (Redis recomendado).
 5. Documenta mejoras y trade-offs.
 
-## Validaciï¿½n
-- Existe comparativa antes y despuï¿½s.
+## Validación
+- Existe comparativa antes y después.
 - Se observan mejoras medibles.
 
-## Rï¿½brica
-- 50% anï¿½lisis de rendimiento.
+## Rúbrica
+- 50% análisis de rendimiento.
 - 30% mejoras aplicadas.
 - 20% evidencia.
 
 ## Entregables
-- EVIDENCIAS.md con mï¿½tricas y conclusiones.
+- EVIDENCIAS.md con métricas y conclusiones.
 
 

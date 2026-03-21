@@ -1,17 +1,16 @@
-# Lab 07 - Docker y publicaciï¿½n en GHCR
+# Lab 07 - Docker y publicación en GHCR
 
 ## Objetivo
-Empaquetar servicios en imï¿½genes y publicarlas en GitHub Container Registry.
+Empaquetar servicios en imágenes y publicarlas en GitHub Container Registry.
 
 ## Prerrequisitos
-- Backend funcional del Lab 03 o 04 (.NET 10 API | FASTAPI).
-- Frontend funcional del Lab 05 o 06 (Next.js 16 App | ANGULAR).
+- Backend y frontend funcionales.
 
 ## Paso a paso
 1. Revisa o crea Dockerfiles.
 2. Construye imagen local de backend y frontend.
 3. Prueba ejecucion local en contenedor.
-4. Etiqueta imï¿½genes con version.
+4. Etiqueta imágenes con version.
 5. Publica en GHCR.
 
 ## Comandos sugeridos
@@ -22,16 +21,16 @@ docker push ghcr.io/<org>/backend:lab07
 docker push ghcr.io/<org>/frontend:lab07
 ```
 
-## Validaciï¿½n
-- Imï¿½genes publicadas y descargables.
+## Validación
+- Imágenes publicadas y descargables.
 - Contenedores levantan correctamente.
 
-## Rï¿½brica
-- 50% imï¿½genes correctas.
+## Rúbrica
+- 50% imágenes correctas.
 - 30% versionado y trazabilidad.
 - 20% evidencia.
 
 ## Entregables
-- EVIDENCIAS.md con tags e imï¿½genes publicadas.
+- EVIDENCIAS.md con tags e imágenes publicadas.
 
 
