@@ -1,4 +1,4 @@
-# Módulo 22 - API Management (Azure API Management y Kong + Konga)
+# Módulo 26 - API Management (Azure API Management y Kong + Konga)
 
 ## Objetivo
 Diseñar y operar una capa de gestión de APIs para exponer servicios de forma segura,

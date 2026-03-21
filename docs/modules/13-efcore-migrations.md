@@ -119,6 +119,5 @@ Consultar historial de migraciones para validar estado de base en soporte.
 ---
 
 ## Laboratorio relacionado
-
 - `docs/labs/13-efcore-migrations.md`
 
